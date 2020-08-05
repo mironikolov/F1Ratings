@@ -1,0 +1,13 @@
+<form #form='ngForm' (submit)="onSubmit(form)">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" #UserName='ngModel' name="UserName" id="username" [(ngModel)]="formModel.UserName" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" #Password='ngModel' name="Password" id="password" [(ngModel)]="formModel.Password" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-block" [disabled]='form.invalid'> Login </button>
+</form>

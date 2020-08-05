@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+
+<div class="wrapper col-md-6 offset-md-3">
+  <div class="wrapped-div">
+    <div class="tab-header" *ngIf="loggedInFlag == false">
+      <h2 routerLink='/user/login' routerLinkActive='active'> Login </h2>
+      <h2 routerLink='/user/registration' routerLinkActive='active'> Register </h2>
+    </div>
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

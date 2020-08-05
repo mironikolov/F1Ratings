@@ -1,0 +1,21 @@
+<form #form='ngForm' (submit)="onSubmit(form)" (reset)="onReset(form)" class="border p-2">
+    <div class="form-group">
+        <label for="country">Country</label>
+        <input class="form-control" [(ngModel)]="formModel.Name" id="country" name="Name" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary" *ngIf="editFlag==false"> Add Country </button>
+    <button type="submit" class="btn btn-primary" *ngIf="editFlag==true"> Edit Country </button>
+    <button type="reset" class="btn btn-danger float-right" *ngIf="editFlag==true"> Cancel </button>
+</form>
+
+<ul class="list-group my-2">
+    <li *ngFor="let country of countries" class="list-group-item" >
+        <span>
+            {{country.name}}
+        </span>
+
+        <button class="btn btn-danger float-right ml-2" (click)="onDelete(country)">Delete</button>
+        <button class="btn btn-primary float-right" (click)="onEdit(country)">Edit</button>
+    </li>
+</ul>

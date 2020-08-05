@@ -1,0 +1,55 @@
+
+<form [formGroup]="RegistrationForm" (submit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" formControlName="UserName" id="username" class="form-control">
+    <div class="text-danger" 
+    *ngIf="RegistrationForm.controls.UserName.errors?.required && RegistrationForm.controls.UserName.touched">
+      This field is required
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" formControlName="Email" id="email" class="form-control">
+    <div class="text-danger" 
+    *ngIf="RegistrationForm.controls.Email.errors?.required && RegistrationForm.controls.Email.touched">
+      This field is required
+    </div>
+    <div class="text-danger" 
+    *ngIf="RegistrationForm.controls.Email.errors?.email && RegistrationForm.controls.Email.touched">
+      Invalid email
+    </div>
+  </div>
+
+  <div [formGroup]="Passwords">
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" formControlName="Password" id="password" class="form-control">
+      <div class="text-danger" 
+        *ngIf="Passwords.controls.Password.errors?.required && Passwords.controls.Password.touched">
+        This field is required
+      </div>
+      <div class="text-danger" 
+        *ngIf="Passwords.controls.Password.errors?.minlength && Passwords.controls.Password.touched">
+        Password is too short
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" formControlName="ConfirmPassword" id="confirmPassword" class="form-control">
+      <div class="text-danger" 
+        *ngIf="Passwords.controls.ConfirmPassword.errors?.required && Passwords.controls.ConfirmPassword.touched">
+        This field is required
+      </div>
+      <div class="text-danger" 
+        *ngIf="Passwords.controls.ConfirmPassword.errors?.passwordMismatch && Passwords.controls.ConfirmPassword.touched">
+        Password mismatch
+      </div>
+    </div>
+  </div>
+
+  <input type="submit" value="Register" class="btn btn-lg btn-block" [disabled]="RegistrationForm.invalid || Passwords.invalid">
+</form>

@@ -1,0 +1,25 @@
+<app-add-track-form (onAdd)="refreshList()"></app-add-track-form>
+
+<div *ngIf="tracks == undefined">
+    <h1>Please add tracks</h1>
+</div>
+<ul class="list-group my-2">
+    <li *ngFor="let track of tracks" class="list-group-item" [attr.data-edit]="false" #trackListItem>
+        <ng-tamplate *ngIf="trackListItem.dataset.edit == 'false'">
+            <span>
+                {{track.name}}, {{track.country.name}}
+            </span>
+        </ng-tamplate>
+        <ng-tamplate *ngIf="trackListItem.dataset.edit == 'true'">
+            <app-add-track-form [trackToEdit]="track" (onEdit)="closeEditForm(trackListItem)"></app-add-track-form>
+        </ng-tamplate>
+
+        <button class="btn btn-danger float-right ml-2" 
+        (click)="onDelete(track)" *ngIf="trackListItem.dataset.edit == 'false'">Delete</button>
+
+        <button class="btn btn-danger float-right ml-2" 
+        (click)="toggleForm(trackListItem)" *ngIf="trackListItem.dataset.edit == 'true'">Cancel</button>
+
+        <button class="btn btn-primary float-right" (click)="toggleForm(trackListItem)">Edit</button>
+    </li>
+</ul>
