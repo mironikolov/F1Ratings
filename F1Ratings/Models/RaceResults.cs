@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace F1Ratings.Models
 {
-    public class RaceDrivers
+    public class RaceResults
     {
         [Required]
         public int RaceId { get; set; }
@@ -15,5 +15,8 @@ namespace F1Ratings.Models
         [Required]
         public int DriverId { get; set; }
         public Drivers Driver { get; set; }
+
+        [Required]
+        public int Position { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using F1Ratings.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace F1Ratings.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200807084940_FixNullableFields")]
+    partial class FixNullableFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,6 +64,19 @@ namespace F1Ratings.Migrations
                     b.ToTable("Drivers");
                 });
 
+            modelBuilder.Entity("F1Ratings.Models.RaceDrivers", b =>
+                {
+                    b.Property<int>("DriverId");
+
+                    b.Property<int>("RaceId");
+
+                    b.HasKey("DriverId", "RaceId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("RaceDrivers");
+                });
+
             modelBuilder.Entity("F1Ratings.Models.RaceRatings", b =>
                 {
                     b.Property<int>("RaceId");
@@ -73,21 +88,6 @@ namespace F1Ratings.Migrations
                     b.HasIndex("RatingId");
 
                     b.ToTable("RaceRatings");
-                });
-
-            modelBuilder.Entity("F1Ratings.Models.RaceResults", b =>
-                {
-                    b.Property<int>("DriverId");
-
-                    b.Property<int>("RaceId");
-
-                    b.Property<int>("Position");
-
-                    b.HasKey("DriverId", "RaceId");
-
-                    b.HasIndex("RaceId");
-
-                    b.ToTable("RaceResults");
                 });
 
             modelBuilder.Entity("F1Ratings.Models.Races", b =>
@@ -311,6 +311,19 @@ namespace F1Ratings.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("F1Ratings.Models.RaceDrivers", b =>
+                {
+                    b.HasOne("F1Ratings.Models.Drivers", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("F1Ratings.Models.Races", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("F1Ratings.Models.RaceRatings", b =>
                 {
                     b.HasOne("F1Ratings.Models.Races", "Race")
@@ -321,19 +334,6 @@ namespace F1Ratings.Migrations
                     b.HasOne("F1Ratings.Models.Ratings", "Rating")
                         .WithMany()
                         .HasForeignKey("RatingId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("F1Ratings.Models.RaceResults", b =>
-                {
-                    b.HasOne("F1Ratings.Models.Drivers", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("F1Ratings.Models.Races", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

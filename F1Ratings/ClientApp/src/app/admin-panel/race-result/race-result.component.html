@@ -1,0 +1,65 @@
+<form class="border p-2">
+    <div class="form-group">
+        <label for="year">Choose year</label>
+        <input type="year" name="year" id="year" class="form-control" [(ngModel)]="formModel.Year" (change)="yearChanged()">
+    </div>
+
+    <div class="form-group">
+        <label for="race">Choose race</label>
+        <select name="race" id="race" class="form-control" [(ngModel)]="formModel.RaceId" (change)="raceChanged()">
+            <option *ngFor="let race of races" [ngValue]="race.id">{{race.track.name}}, {{race.date | date}}</option>
+        </select>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col">
+        <h3>Drivers</h3>
+        <table class="table"
+            cdkDropList (cdkDropListDropped)="drop($event)"
+            #driversTable="cdkDropList"
+            [cdkDropListConnectedTo]="[resultsTable]"
+            [cdkDropListData]="drivers">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let driver of drivers" cdkDrag>
+                <td>{{driver.firstName}}</td>
+                <td>{{driver.lastName}}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="col">
+        <h3>Result</h3>
+        <table class="table"
+            cdkDropList (cdkDropListDropped)="drop($event)"
+            #resultsTable="cdkDropList"
+            [cdkDropListConnectedTo]="[driversTable]"
+            [cdkDropListData]="raceResults">
+        <thead>
+            <tr>
+                <th scope="col">Position</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let raceResult of raceResults; let i = index" cdkDrag>
+                <th scope="row">{{i+1}}</th>
+                <td>{{getRaceResultCellData(raceResult, 'firstName')}}</td>
+                <td>{{getRaceResultCellData(raceResult, 'lastName')}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><button class="btn btn-primary" (click)="onSave()">Save</button></td>
+            </tr>
+        </tfoot>
+        </table>
+    </div>
+</div>

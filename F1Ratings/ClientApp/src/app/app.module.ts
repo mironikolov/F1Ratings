@@ -9,6 +9,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+import { MaterialModule } from './Modules/material/material.module';
+
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
@@ -21,6 +23,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddCountryFormComponent } from './admin-panel/add-country-form/add-country-form.component';
 import { TrackComponent } from './admin-panel/track/track.component';
 import { AddTrackFormComponent } from './admin-panel/track/add-track-form/add-track-form.component';
+import { RaceComponent } from './admin-panel/race/race.component';
+import { AddRaceFormComponent } from './admin-panel/race/add-race-form/add-race-form.component';
+import { DriverComponent } from './admin-panel/driver/driver.component';
+import { AddDriverFormComponent } from './admin-panel/driver/add-driver-form/add-driver-form.component';
+import { RaceResultComponent } from './admin-panel/race-result/race-result.component';
 
 export function getBaseUrl(){
   return document.getElementsByTagName('base')[0].href;
@@ -39,7 +46,12 @@ export function getBaseUrl(){
     NavbarComponent,
     AddCountryFormComponent,
     TrackComponent,
-    AddTrackFormComponent
+    AddTrackFormComponent,
+    RaceComponent,
+    AddRaceFormComponent,
+    DriverComponent,
+    AddDriverFormComponent,
+    RaceResultComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +63,8 @@ export function getBaseUrl(){
     ToastrModule.forRoot({
       progressBar: true
     }),
-    FormsModule
+    FormsModule,
+    MaterialModule
   ],
   providers: [
     {

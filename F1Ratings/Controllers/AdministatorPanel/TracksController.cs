@@ -25,7 +25,7 @@ namespace F1Ratings.Controllers
 
         public override ActionResult PostEntity(Tracks track)
         {
-            if (!ModelState.IsValid)
+            if ( track.CountryId == 0 )
             {
                 return BadRequest("Model is invalid");
             }

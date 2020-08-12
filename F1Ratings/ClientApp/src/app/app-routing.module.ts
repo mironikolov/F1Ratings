@@ -10,6 +10,9 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { InfoComponent } from './user/info/info.component';
 import { AddCountryFormComponent } from './admin-panel/add-country-form/add-country-form.component';
 import { TrackComponent } from './admin-panel/track/track.component';
+import { RaceComponent } from './admin-panel/race/race.component';
+import { DriverComponent } from './admin-panel/driver/driver.component';
+import { RaceResultComponent } from './admin-panel/race-result/race-result.component';
 
 const routes: Routes = [
   { path: 'user', component: UserComponent, children: [
@@ -21,7 +24,10 @@ const routes: Routes = [
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'adminpanel', component: AdminPanelComponent, canActivate:[AuthGuard], data: { permittedRoles: ['Admin'] }, children: [
     { path: 'addcountry', component: AddCountryFormComponent },
-    { path: 'track', component: TrackComponent}
+    { path: 'track', component: TrackComponent},
+    { path: 'race', component: RaceComponent },
+    { path: 'driver', component: DriverComponent },
+    { path: 'raceresult', component: RaceResultComponent }
   ] },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];

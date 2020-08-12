@@ -1,0 +1,26 @@
+<app-add-race-form (onAdd)="refreshList()"></app-add-race-form>
+
+<div *ngIf="races == undefined">
+    <h1>Please add race</h1>
+</div>
+<ul class="list-group my-2">
+    <li *ngFor="let race of races" class="list-group-item" [attr.data-edit]="false" #raceListItem>
+        <div *ngIf="raceListItem.dataset.edit == 'false'">
+            <span>
+                {{race.track.name}}, {{race.track.country.name}}
+            </span>
+            <span class="float-right">{{race.date | date}}</span>
+        </div>
+        <div *ngIf="raceListItem.dataset.edit == 'true'">
+            <app-add-race-form [raceToEdit]="race" (onEdit)="closeEditForm(raceListItem)"></app-add-race-form>
+        </div>
+
+        <button class="btn btn-danger float-right ml-2" 
+        (click)="onDelete(track)" *ngIf="raceListItem.dataset.edit == 'false'">Delete</button>
+
+        <button class="btn btn-danger float-right ml-2" 
+        (click)="toggleForm(raceListItem)" *ngIf="raceListItem.dataset.edit == 'true'">Cancel</button>
+
+        <button class="btn btn-primary float-right" (click)="toggleForm(raceListItem)">Edit</button>
+    </li>
+</ul>

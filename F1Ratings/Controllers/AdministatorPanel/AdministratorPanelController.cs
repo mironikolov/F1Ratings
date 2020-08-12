@@ -31,7 +31,7 @@ namespace F1Ratings.Controllers
         public abstract ActionResult PostEntity(T entity);
 
         /// <summary>
-        /// Get request for all recors
+        /// Get request on /controller/All for all recors
         /// </summary>
         /// <returns>List of recors</returns>
         [Route("All")]
@@ -39,7 +39,7 @@ namespace F1Ratings.Controllers
         public abstract ActionResult GetEntities();
 
         /// <summary>
-        /// Delete request
+        /// Delete request on /Controller/Delete/{id}
         /// </summary>
         /// <param name="id">Record Id</param>
         /// <returns></returns>
@@ -48,7 +48,7 @@ namespace F1Ratings.Controllers
         public abstract ActionResult DeleteEntity(int id);
 
         /// <summary>
-        /// Put request (edit record)
+        /// Put request (edit record) on /Controller/Edit
         /// </summary>
         /// <param name="entity">New data</param>
         /// <returns> ActionResul </returns>

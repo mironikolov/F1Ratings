@@ -1,0 +1,60 @@
+<div class="accordion">
+    <div class="card">
+        <div class="card-header">
+            <button class="btn btn-link btn-block text-left"
+            type="button"
+            data-toggle="collapse"
+            data-target="#driverForm">
+                Driver Form
+            </button>
+        </div>
+    </div>
+
+    <div class="collapse" id="driverForm" >
+        <app-add-driver-form></app-add-driver-form>
+    </div>
+</div>
+
+<div *ngIf="drivers == undefined">
+    <h1>Please add driver</h1>
+</div>
+<ul class="list-group my-2">
+    <li *ngFor="let driver of drivers" class="list-group-item" [attr.data-edit]="false" #driverListItem>
+        <div *ngIf="driverListItem.dataset.edit == 'false'">
+            <div class="accordion" id="driverInfoAccordion">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link btn-block text-left"
+                        type="button"
+                        data-toggle="collapse"
+                        [attr.data-target]="'#'+driver.firstName+driver.lastName">
+                            {{driver.firstName}} {{driver.lastName}}
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="collapse" [id]="driver.firstName + driver.lastName">
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let item of driver | keyvalue">
+                                <td>{{item.key}}</td>
+                                <td>{{item.value}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="driverListItem.dataset.edit == 'true'">
+            <app-add-driver-form [driverToEdit]="driver" (onEdit)="closeEditForm(driverListItem)"></app-add-driver-form>
+        </div>
+
+        <button class="btn btn-danger float-right ml-2" 
+        (click)="onDelete(driver)" *ngIf="driverListItem.dataset.edit == 'false'">Delete</button>
+
+        <button class="btn btn-danger float-right ml-2" 
+        (click)="toggleForm(driverListItem)" *ngIf="driverListItem.dataset.edit == 'true'">Cancel</button>
+
+        <button class="btn btn-primary float-right" (click)="toggleForm(driverListItem)">Edit</button>
+    </li>
+</ul>

@@ -14,7 +14,7 @@ namespace F1Ratings.Models
 
         public DbSet<Drivers> Drivers{ get; set; }
 
-        public DbSet<RaceDrivers> RaceDrivers { get; set; }
+        public DbSet<RaceResults> RaceResults { get; set; }
 
         public DbSet<RaceRatings> RaceRatings { get; set; }
 
@@ -37,7 +37,7 @@ namespace F1Ratings.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating( modelBuilder );
-            modelBuilder.Entity<RaceDrivers>().HasKey(rd => new { rd.DriverId, rd.RaceId });
+            modelBuilder.Entity<RaceResults>().HasKey(rd => new { rd.DriverId, rd.RaceId });
             modelBuilder.Entity<RaceRatings>().HasKey(rr => new { rr.RaceId, rr.RatingId });
         }
     }
